@@ -1,13 +1,14 @@
 # About environment variables
+
 green "Variables"
 
 test_setting_the_variable() {
-  variable=1
+  local variable=1
   assertEqual 1 $variable
 }
 
 test_using_double_quotes() {
-  variable=2
+  local variable=2
   assertEqual "foo 2" "foo $variable"
 }
 
@@ -15,6 +16,20 @@ test_unsetting_variables() {
   local newVariable="Foooo"
   unset newVariable
   assertEqual $newVariable ""
+}
+
+THIS_VARIABLE_IS_GLOBAL=42
+test_global_variables() {
+  assertEqual $THIS_VARIABLE_IS_GLOBAL 42
+}
+
+function_with_a_local_variable() {
+  local THIS_VARIABLE_IS_LOCAL=42
+}
+function_with_a_local_variable
+
+test_local_variables() {
+  assertEqual $THIS_VARIABLE_IS_LOCAL __
 }
 
 # description "Set the variable to the right value" "about_variables.sh:$LINENO"

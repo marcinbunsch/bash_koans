@@ -25,7 +25,7 @@ assertEqual() {
     red  "  $filename:$2"
     echo ''
     echo "You are now 10/291 koans and 2/36 lessons away from reaching enlightenment"
-    # exit 1
+    exit 1
   fi
 }
 # This allows us to get the name of the functionw where this function was called
