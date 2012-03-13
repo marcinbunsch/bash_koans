@@ -18,18 +18,32 @@ test_unsetting_variables() {
   assertEqual $newVariable ""
 }
 
+# Variables defined in global namespace are available everywhere
 THIS_VARIABLE_IS_GLOBAL=42
 test_global_variables() {
   assertEqual $THIS_VARIABLE_IS_GLOBAL 42
 }
 
+# In this function we define a global variable
+function_with_a_global_variable() {
+  THIS_VARIABLE_IS_GLOBAL_FROM_A_FUNCTION=42
+}
+# Run the function
+function_with_a_global_variable
+
+test_global_variables_from_functions() {
+  assertEqual $THIS_VARIABLE_IS_GLOBAL_FROM_A_FUNCTION 42
+}
+
+# In this function we define a local variable
 function_with_a_local_variable() {
   local THIS_VARIABLE_IS_LOCAL=42
 }
+# Run the function
 function_with_a_local_variable
 
 test_local_variables() {
-  assertEqual $THIS_VARIABLE_IS_LOCAL __
+  assertEqual $THIS_VARIABLE_IS_LOCAL ''
 }
 
 # description "Set the variable to the right value" "about_variables.sh:$LINENO"
