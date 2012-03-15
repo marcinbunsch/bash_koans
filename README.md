@@ -12,4 +12,4 @@ If you are an expert, PLEASE contribute and make it even better!
 
 Just clone this repo and run:
 
-  ./meditate
+    ./meditate
