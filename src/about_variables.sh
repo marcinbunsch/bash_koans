@@ -24,7 +24,7 @@ test_global_variables() {
   assertEqual $THIS_VARIABLE_IS_GLOBAL 42
 }
 
-# In this function we define a global variable
+# In this function we define a global variable, it becomes available outside
 function_with_a_global_variable() {
   THIS_VARIABLE_IS_GLOBAL_FROM_A_FUNCTION=42
 }
@@ -35,7 +35,7 @@ test_global_variables_from_functions() {
   assertEqual $THIS_VARIABLE_IS_GLOBAL_FROM_A_FUNCTION 42
 }
 
-# In this function we define a local variable
+# In this function we define a local variable, it is not accessible outside
 function_with_a_local_variable() {
   local THIS_VARIABLE_IS_LOCAL=42
 }
@@ -46,22 +46,25 @@ test_local_variables() {
   assertEqual $THIS_VARIABLE_IS_LOCAL ''
 }
 
-# description "Set the variable to the right value" "about_variables.sh:$LINENO"
+test_variable_name_expansion_within_text() {
+  local var1=myvar
 
-# variable=1
+  # __ = this_is_myvar_yay
+  assertEqual this_is_${var1}_yay this_is_myvar_yay
 
-# assertEqual 1 $variable
+}
 
-# description "Variables can be used in double quotes" "about_variables.sh:$LINENO"
+test_only_exported_variables_are_accessible_by_another_process() {
+  local MY_EXPORTED_VARIABLE=43
 
-# variable=1
+  assertEqual `bin/variable_check` ''
 
-# assertEqual "foo 1" "foo $variable"
+  MY_EXPORTED_VARIABLE=43
 
-# description "Variables can removed using unset" "about_variables.sh:$LINENO"
+  assertEqual `bin/variable_check` ''
 
-# newVariable="Foooo"
-# unset newVariable
+  export MY_EXPORTED_VARIABLE=43
 
-# assertEqual $newVariable __
+  assertEqual `bin/variable_check` '43'
+}
 

@@ -11,9 +11,7 @@ red() {
 }
 
 assertEqual() {
-  if [[ "$3" = "$4" ]]; then
-    green "  $1"
-  else
+  if [[ "$3" != "$4" ]]; then
     echo ''
     red "  $1 has damaged your karma."
     echo ''

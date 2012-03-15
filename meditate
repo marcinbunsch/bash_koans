@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Setup
+mkdir -p tmp
+rm -rf bin/*
+mkdir -p bin
+# C program for getting the environment variable
+gcc -o bin/variable_check support/variable_check.c
+
+
+# Load all files in support
+for file in `ls support | grep .sh`; do
+  source support/$file
+done
+
+# Load all files in src
+for file in `ls src | grep .sh`; do
+  source src/$file
+
+  # OMG this is a bash test runner!! <3 <3 <3
+  # functions=`declare -F | cut -d ' ' -f 3 | grep ^test_`
+  # This style allows us to run tests in order
+  functions=`grep -h test_ src/$file | cut -d '(' -f 1`
+  for i in $functions; do
+    rm -rf tmp/*
+    $i
+    green "  $i"
+  done
+
+done
+
