@@ -8,7 +8,7 @@ test_if_condition() {
     local assert='YES'
   fi
 
-  assertEqual $assert 'YES'
+  assertEqual $assert __
 }
 
 
@@ -22,7 +22,7 @@ test_if_condition_with_else() {
     local assert='NO'
   fi
 
-  assertEqual $assert 'NO'
+  assertEqual $assert __
 }
 
 test_if_condition_with_variables() {
@@ -33,7 +33,7 @@ test_if_condition_with_variables() {
     local assert='ok'
   fi
 
-  assertEqual $assert 'ok'
+  assertEqual $assert __
 
 }
 
@@ -47,7 +47,7 @@ test_multiple_if_conditions() {
     local assert='YES'
   fi
 
-  assertEqual $assert 'YES'
+  assertEqual $assert __
 
 }
 

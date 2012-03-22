@@ -5,7 +5,7 @@ test_for_loops() {
   for iterator in $( seq 1 10 ); do
     (( sum++ ))
   done
-  assertEqual $sum 10
+  assertEqual $sum __
 }
 
 test_while_loops() {
@@ -14,7 +14,7 @@ test_while_loops() {
     (( counter++ ))
   done
 
-  assertEqual $counter 5
+  assertEqual $counter __
 }
 
 
@@ -24,5 +24,5 @@ test_until_loops() {
     (( counter-- ))
   done
 
-  assertEqual $counter 7
+  assertEqual $counter __
 }

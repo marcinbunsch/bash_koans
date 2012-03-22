@@ -22,7 +22,7 @@ assertEqual() {
     local filename=`grep  $1 src/* -l`
     red  "  $filename:$2"
     echo ''
-    echo "You are now 10/291 koans and 2/36 lessons away from reaching enlightenment"
+    # echo "You are now 10/291 koans and 2/36 lessons away from reaching enlightenment"
     exit 1
   fi
 }

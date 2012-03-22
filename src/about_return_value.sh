@@ -3,9 +3,9 @@ green "Return value"
 test_return_value() {
   cd /ZOMGNODIRLIKETHIS &> /dev/null
 
-  assertEqual $? 1
+  assertEqual $? __
 
   ls ~/ > /dev/null
 
-  assertEqual $? 0
+  assertEqual $? __
 }

@@ -6,6 +6,9 @@ rm -rf bin/*
 mkdir -p bin
 # C program for getting the environment variable
 gcc -o bin/variable_check support/variable_check.c
+gcc -o bin/output_stderr support/output_stderr.c
+gcc -o bin/output_stdout support/output_stdout.c
+gcc -o bin/output_both support/output_both.c
 
 
 # Load all files in support
