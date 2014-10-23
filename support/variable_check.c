@@ -6,4 +6,5 @@ int main(void) {
   if (myenvvar) {
     printf("%s",myenvvar);
   }
+  return 0;
 }
