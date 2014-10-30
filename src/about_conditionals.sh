@@ -51,4 +51,21 @@ test_multiple_if_conditions() {
 
 }
 
+test_directory_if_conditions() {
+  local test='src' # __
+
+  if [ -d src ]; then
+    local assert='yes'
+  fi
+
+  assertEqual $assert __
+
+  if [ ! -d NOT_EXISTENT_DIR ]; then
+    local assert='no'
+  fi
+
+  assertEqual $assert __
+
+}
+
 # TODO add koans for 'man test' entries
