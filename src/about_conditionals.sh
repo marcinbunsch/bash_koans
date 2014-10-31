@@ -68,4 +68,15 @@ test_directory_if_conditions() {
 
 }
 
+test_file_if_conditions() {
+  local test='src' # __
+
+  if [ -f README.md ]; then
+    local assert='yes'
+  fi
+
+  assertEqual $assert __
+
+}
+
 # TODO add koans for 'man test' entries
