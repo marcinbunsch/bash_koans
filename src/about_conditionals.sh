@@ -52,8 +52,6 @@ test_multiple_if_conditions() {
 }
 
 test_directory_if_conditions() {
-  local test='src' # __
-
   if [ -d src ]; then
     local assert='yes'
   fi
@@ -69,8 +67,6 @@ test_directory_if_conditions() {
 }
 
 test_file_if_conditions() {
-  local test='src' # __
-
   if [ -f README.md ]; then
     local assert='yes'
   fi

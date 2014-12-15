@@ -20,7 +20,7 @@ test_while_loops() {
 
 test_until_loops() {
   counter=10
-  while [  $counter -gt 7 ]; do
+  until [  $counter -lt 7 ]; do
     (( counter-- ))
   done
 
