@@ -1,4 +1,4 @@
-green "Arithmetic evaluation"
+lesson_title "Arithmetic evaluation"
 
 test_arithmetic_evaluation() {
 

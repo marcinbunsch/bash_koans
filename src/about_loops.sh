@@ -1,4 +1,4 @@
-green 'Loops'
+lesson_title 'Loops'
 
 test_for_loops() {
   local sum

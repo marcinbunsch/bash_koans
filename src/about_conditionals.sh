@@ -1,4 +1,4 @@
-green "Conditions"
+lesson_title "Conditions"
 
 test_if_condition() {
 

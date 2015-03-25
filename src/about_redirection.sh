@@ -1,4 +1,4 @@
-green "Redirection"
+lesson_title "Redirection"
 
 test_redirecting_stdout_to_file() {
 

@@ -1,6 +1,6 @@
 # About environment variables
 
-green "Variables"
+lesson_title "Variables"
 
 test_setting_the_variable() {
   local variable=1

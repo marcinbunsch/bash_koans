@@ -17,8 +17,14 @@ for file in support/*.sh ; do
   source "$file"
 done
 
+LESSONS_TOTAL=$(ls src/*.sh| wc -l)
+LESSONS_LEFT=${LESSONS_TOTAL}
+KOANS_TOTAL=$(grep --perl-regexp "test_\w*\s*\(\)\s*{" src/*.sh| wc -l)
+KOANS_LEFT=${KOANS_TOTAL}
+
 # Load all files in src
 for file in src/*.sh ; do
+  # echo "Thinking $(basename $file .sh)"
   source "$file"
 
   # OMG this is a bash test runner!! <3 <3 <3
@@ -28,8 +34,9 @@ for file in src/*.sh ; do
   for i in $functions ; do
     rm -rf tmp/*
     $i
-    green "  $i"
+    green "  $i has expanded your awareness."
+    ((KOANS_LEFT -= 1))
   done
-
+  ((LESSONS_LEFT -= 1))
 done
 

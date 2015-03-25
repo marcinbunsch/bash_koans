@@ -1,4 +1,4 @@
-green "Piping"
+lesson_title "Piping"
 
 test_piping_output_to_another_program() {
   # The pipe lets you use the output of a program as the input of another one
