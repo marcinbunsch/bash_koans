@@ -10,7 +10,7 @@ test_for_loops() {
 
 test_while_loops() {
   counter=0
-  while [  $counter -lt 5 ]; do
+  while [ $counter -lt 5 ]; do
     (( counter++ ))
   done
 
@@ -20,7 +20,7 @@ test_while_loops() {
 
 test_until_loops() {
   counter=10
-  until [  $counter -lt 7 ]; do
+  until [ $counter -lt 7 ]; do
     (( counter-- ))
   done
 

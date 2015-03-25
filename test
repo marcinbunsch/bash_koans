@@ -13,8 +13,8 @@ gcc -o bin/output_both support/output_both.c
 
 
 # Load all files in support
-for file in `ls support | grep .sh`; do
-  source support/$file
+for file in support/*.sh ; do
+  source "$file"
 done
 
 green() {
@@ -22,8 +22,8 @@ green() {
 }
 
 # Load all files in src
-for file in `ls src | grep .sh`; do
-  source src/$file
+for file in src/*.sh ; do
+  source "$file"
 done
 
 $1

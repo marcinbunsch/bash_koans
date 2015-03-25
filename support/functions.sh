@@ -16,11 +16,11 @@ assertEqual() {
     red "  $1 has damaged your karma."
     echo ''
     echo "You have not yet reached enlightenment ..."
-    red  "  Expected '$3', got '$4'"
+    red "  Expected '$3', got '$4'"
     echo ''
     echo "Please meditate on the following code:"
-    local filename=`grep  $1 src/* -l`
-    red  "  $filename:$2"
+    local filename=$(grep "$1" src/* -l)
+    red "  $filename:$2"
     echo ''
     # echo "You are now 10/291 koans and 2/36 lessons away from reaching enlightenment"
     exit 1
