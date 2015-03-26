@@ -2,7 +2,8 @@ lesson_title 'Loops'
 
 test_for_loops() {
   local sum
-  for iterator in $( seq 1 10 ); do
+  # _ is a (rather obscure) dummy variable
+  for _ in $( seq 1 10 ); do
     (( sum++ ))
   done
   assertEqual $sum __

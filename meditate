@@ -17,9 +17,9 @@ for file in support/*.sh ; do
   source "$file"
 done
 
-LESSONS_TOTAL=$(ls src/*.sh| wc -l)
+LESSONS_TOTAL=$(find src -maxdepth 1 -name '*.sh' | wc -l)
 LESSONS_LEFT=${LESSONS_TOTAL}
-KOANS_TOTAL=$(grep --perl-regexp "test_\w*\s*\(\)\s*{" src/*.sh| wc -l)
+KOANS_TOTAL=$(grep --no-filename --count --perl-regexp "test_\w*\s*\(\)\s*{" src/*.sh | awk '{x+=$1} END {print x}')
 KOANS_LEFT=${KOANS_TOTAL}
 
 # Load all files in src
