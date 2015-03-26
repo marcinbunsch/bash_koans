@@ -24,6 +24,20 @@ red() {
   echo -e "${COLOR_RED}${1}${COLOR_RESET}"
 }
 
+output_stdout() {
+  printf "out to stdout"
+}
+
+output_stderr() {
+  printf "out to stdout"
+  printf "out to stderr" 1>&2
+}
+
+output_both() {
+  printf "out to stdout"
+  printf "out to stderr" 1>&2
+}
+
 assertEqual() {
   if [[ "$3" != "$4" ]]; then
     local -i KOANS_DONE

@@ -57,14 +57,14 @@ test_variable_name_expansion_within_text() {
 test_only_exported_variables_are_accessible_by_another_process() {
   local MY_EXPORTED_VARIABLE=43
 
-  assertEqual "$(bin/variable_check)" __
+  assertEqual "$(support/variable_check)" __
 
   MY_EXPORTED_VARIABLE=43
 
-  assertEqual "$(bin/variable_check)" __
+  assertEqual "$(support/variable_check)" __
 
   export MY_EXPORTED_VARIABLE=43
 
-  assertEqual "$(bin/variable_check)" __
+  assertEqual "$(support/variable_check)" __
 }
 
