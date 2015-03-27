@@ -14,6 +14,10 @@ LESSONS_LEFT=${LESSONS_TOTAL}
 KOANS_TOTAL=$(grep --no-filename --count --perl-regexp "test_\w*\s*\(\)\s*{" src/*.sh | awk '{x+=$1} END {print x}')
 KOANS_LEFT=${KOANS_TOTAL}
 
+TEST_ALL="NO" # Normal behavior
+# ~ TEST_ALL="YES" # Don't stop on assert failed. (Useful in development)
+export TEST_ALL
+
 # Load all files in src
 for file in src/*.sh ; do
   # echo "Thinking $(basename $file .sh)"
@@ -26,7 +30,6 @@ for file in src/*.sh ; do
   for i in $functions ; do
     rm -rf tmp/*
     $i
-    green "  $i has expanded your awareness."
     ((KOANS_LEFT -= 1))
   done
   ((LESSONS_LEFT -= 1))

@@ -29,7 +29,6 @@ output_stdout() {
 }
 
 output_stderr() {
-  printf "out to stdout"
   printf "out to stderr" 1>&2
 }
 
@@ -48,12 +47,14 @@ assertEqual() {
   local ASSERT_SOURCE_LINE="${BASH_LINENO[0]}"
 
   if [[ "${EXPECTED_VALUE}" != "${REAL_VALUE}" ]]; then
+    
     local -i KOANS_DONE
     local -i LESSONS_DONE
     local filename=$(grep "${ASSERT_FUNCTION}" src/* -l)
     ((KOANS_DONE=KOANS_TOTAL - KOANS_LEFT))
     ((LESSONS_DONE=LESSONS_TOTAL - LESSONS_LEFT))
-    echo "
+    if [ "$TEST_ALL" != "YES" ] ; then
+      echo "
   ${COLOR_RED}${ASSERT_FUNCTION} has damaged your karma.${COLOR_RESET}
 
 You have not yet reached enlightenment ...
@@ -66,7 +67,11 @@ You have completed ${KOANS_DONE} koans and ${LESSONS_DONE} lessons.
 You are now ${KOANS_LEFT} koans and ${LESSONS_LEFT} lessons away from reaching enlightenment
 "
 # You are now ${KOANS_LEFT} of ${KOANS_TOTAL} koans and ${LESSONS_LEFT} of ${LESSONS_TOTAL} lessons away from reaching enlightenment
-
-    exit 1
+      exit 1
+    else
+      echo "  ${COLOR_RED}${ASSERT_FUNCTION} has damaged your karma.${COLOR_RESET}"
+    fi
+  else
+    echo "  ${COLOR_GREEN}${ASSERT_FUNCTION} has expanded your awareness.${COLOR_RESET}"
   fi
 }
