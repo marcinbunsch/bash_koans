@@ -39,20 +39,28 @@ output_both() {
 }
 
 assertEqual() {
-  if [[ "$3" != "$4" ]]; then
+  # Parameters
+  local EXPECTED_VALUE="$1"
+  local REAL_VALUE="$2"
+  # Context
+  local ASSERT_FUNCTION="${FUNCNAME[1]}"
+  local ASSERT_SOURCE_FILE="${BASH_SOURCE[1]}"
+  local ASSERT_SOURCE_LINE="${BASH_LINENO[0]}"
+
+  if [[ "${EXPECTED_VALUE}" != "${REAL_VALUE}" ]]; then
     local -i KOANS_DONE
     local -i LESSONS_DONE
-    local filename=$(grep "$1" src/* -l)
+    local filename=$(grep "${ASSERT_FUNCTION}" src/* -l)
     ((KOANS_DONE=KOANS_TOTAL - KOANS_LEFT))
     ((LESSONS_DONE=LESSONS_TOTAL - LESSONS_LEFT))
     echo "
-  ${COLOR_RED}$1 has damaged your karma.${COLOR_RESET}
+  ${COLOR_RED}${ASSERT_FUNCTION} has damaged your karma.${COLOR_RESET}
 
 You have not yet reached enlightenment ...
-  ${COLOR_RED}Expected $3, got $4${COLOR_RESET}
+  ${COLOR_RED}Expected ${EXPECTED_VALUE}, got ${REAL_VALUE}${COLOR_RESET}
 
 Please meditate on the following code:
-  ${COLOR_RED}$filename:$2${COLOR_RESET}
+  ${COLOR_RED}${ASSERT_SOURCE_FILE}:${ASSERT_SOURCE_LINE}${COLOR_RESET}
 
 You have completed ${KOANS_DONE} koans and ${LESSONS_DONE} lessons.
 You are now ${KOANS_LEFT} koans and ${LESSONS_LEFT} lessons away from reaching enlightenment
@@ -62,6 +70,3 @@ You are now ${KOANS_LEFT} koans and ${LESSONS_LEFT} lessons away from reaching e
     exit 1
   fi
 }
-# This allows us to get the name of the functionw where this function was called
-# http://stackoverflow.com/questions/7650438/bash-funcname-value-expanding
-alias assertEqual='assertEqual ${FUNCNAME} ${LINENO}'

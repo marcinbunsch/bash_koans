@@ -7,10 +7,10 @@ test_arithmetic_evaluation() {
 # shellcheck disable=SC2116
   output=$(echo 1+1)
 
-  assertEqual "$output" "1+1"
+  assertEqual "$output" __
 
   output2=$((1+1))
 
-  assertEqual $output2 2
+  assertEqual $output2 __
 
 }
