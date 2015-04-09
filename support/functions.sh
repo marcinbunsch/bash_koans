@@ -50,7 +50,6 @@ assertEqual() {
     
     local -i KOANS_DONE
     local -i LESSONS_DONE
-    local filename=$(grep "${ASSERT_FUNCTION}" src/* -l)
     ((KOANS_DONE=KOANS_TOTAL - KOANS_LEFT))
     ((LESSONS_DONE=LESSONS_TOTAL - LESSONS_LEFT))
     if [ "$TEST_ALL" != "YES" ] ; then
