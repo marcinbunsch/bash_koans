@@ -2,7 +2,7 @@ lesson_title 'Loops'
 
 test_for_loops() {
   local sum
-  # _ is a (rather obscure) dummy variable
+  # _ is a (rather obscure) dummy variable (used for throwaway values)
   for _ in $( seq 1 10 ); do
     (( sum++ ))
   done
