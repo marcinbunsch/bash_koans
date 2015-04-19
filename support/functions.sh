@@ -2,15 +2,32 @@
 # Required for the alias trick to work
 shopt -s expand_aliases
 
-COLOR_RED=$(
+COLOR_RESET=$(tput sgr0)
+COLOR_RED="${COLOR_RESET}$(
     tput setaf 1 # Red
     tput bold
-    )
-COLOR_GREEN=$(
+    )"
+COLOR_GREEN="${COLOR_RESET}$(
     tput setaf 2 # Green
     tput bold
-    )
-COLOR_RESET=$(tput sgr0)
+    )"
+COLOR_GREEN_DARK="${COLOR_RESET}$(
+    tput setaf 2 # Green
+    )"
+
+# For future reference:
+# ~ YELLOW=$(tput setaf 3)
+# ~ LIME_YELLOW=$(tput setaf 190)
+# ~ POWDER_BLUE=$(tput setaf 153)
+# ~ BLUE=$(tput setaf 4)
+# ~ MAGENTA=$(tput setaf 5)
+# ~ CYAN=$(tput setaf 6)
+# ~ WHITE=$(tput setaf 7)
+# ~ BRIGHT=$(tput bold)
+# ~ NORMAL=$(tput sgr0)
+# ~ BLINK=$(tput blink)
+# ~ REVERSE=$(tput smso)
+# ~ UNDERLINE=$(tput smul)
 
 lesson_title() {
     echo "Thinking about $1"
@@ -36,6 +53,9 @@ output_both() {
   printf "out to stdout"
   printf "out to stderr" 1>&2
 }
+
+# Global variable to track various asserts into test function
+_assertEqual_LAST_AWARENESS_ASSERT_FUNCTION="none"
 
 assertEqual() {
   # Parameters
@@ -71,6 +91,13 @@ You are now ${KOANS_LEFT} koans and ${LESSONS_LEFT} lessons away from reaching e
       echo "  ${COLOR_RED}${ASSERT_FUNCTION} has damaged your karma.${COLOR_RESET}"
     fi
   else
-    echo "  ${COLOR_GREEN}${ASSERT_FUNCTION} has expanded your awareness.${COLOR_RESET}"
+    if [ "$_assertEqual_LAST_AWARENESS_ASSERT_FUNCTION" != "$ASSERT_FUNCTION" ]
+    then
+        echo "  ${COLOR_GREEN}${ASSERT_FUNCTION} has expanded your awareness.${COLOR_RESET}"
+    else
+        # Same function again, tellin what line is it
+        echo "  ${COLOR_GREEN}${ASSERT_FUNCTION}${COLOR_GREEN_DARK}:${ASSERT_SOURCE_LINE}${COLOR_GREEN} has expanded your awareness.${COLOR_RESET}"
+    fi
+    _assertEqual_LAST_AWARENESS_ASSERT_FUNCTION="$ASSERT_FUNCTION"
   fi
 }
