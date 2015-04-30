@@ -11,7 +11,7 @@ done
 
 LESSONS_TOTAL=$(find src -maxdepth 1 -name '*.sh' | wc -l)
 LESSONS_LEFT=${LESSONS_TOTAL}
-KOANS_TOTAL=$(grep --no-filename --count --perl-regexp "test_\w*\s*\(\)\s*{" src/*.sh | awk '{x+=$1} END {print x}')
+KOANS_TOTAL=$(grep --no-filename --count "test_[a-zA-Z_]* *() *{" src/*.sh | awk '{x+=$1} END {print x}')
 KOANS_LEFT=${KOANS_TOTAL}
 
 TEST_ALL="NO" # Normal behavior
