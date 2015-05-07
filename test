@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+if [ -z "$1" ]; then
+  echo "usage: test [koan name]"
+  exit
+fi
+
 # Setup
 cd "$(dirname "$0")"
 mkdir -p tmp
@@ -10,6 +15,9 @@ for file in support/*.sh ; do
 done
 
 green() {
+  return
+}
+lesson_title() {
   return
 }
 
