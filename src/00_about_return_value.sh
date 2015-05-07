@@ -1,4 +1,4 @@
-green "Return value"
+lesson_title "Return value"
 
 test_return_value() {
   cd /ZOMGNODIRLIKETHIS &> /dev/null

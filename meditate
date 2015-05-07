@@ -1,35 +1,37 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Setup
 cd "$(dirname "$0")"
 mkdir -p tmp
-rm -rf bin/*
-mkdir -p bin
-# C program for getting the environment variable
-gcc -o bin/variable_check support/variable_check.c
-gcc -o bin/output_stderr support/output_stderr.c
-gcc -o bin/output_stdout support/output_stdout.c
-gcc -o bin/output_both support/output_both.c
-
 
 # Load all files in support
-for file in `ls support | grep .sh`; do
-  source support/$file
+for file in support/*.sh ; do
+  source "$file"
 done
 
+LESSONS_TOTAL=$(find src -maxdepth 1 -name '*.sh' | wc -l)
+LESSONS_LEFT=${LESSONS_TOTAL}
+KOANS_TOTAL=$(grep --no-filename --count "test_[a-zA-Z_]* *() *{" src/*.sh | awk '{x+=$1} END {print x}')
+KOANS_LEFT=${KOANS_TOTAL}
+
+TEST_ALL="NO" # Normal behavior
+# ~ TEST_ALL="YES" # Don't stop on assert failed. (Useful in development)
+export TEST_ALL
+
 # Load all files in src
-for file in `ls src | grep .sh`; do
-  source src/$file
+for file in src/*.sh ; do
+  # echo "Thinking $(basename $file .sh)"
+  source "$file"
 
   # OMG this is a bash test runner!! <3 <3 <3
-  # functions=`declare -F | cut -d ' ' -f 3 | grep ^test_`
+  # functions=$(declare -F | cut -d ' ' -f 3 | grep ^test_)
   # This style allows us to run tests in order
-  functions=`grep -h test_ src/$file | cut -d '(' -f 1`
-  for i in $functions; do
+  functions=$(grep -h test_ "$file" | cut -d '(' -f 1)
+  for i in $functions ; do
     rm -rf tmp/*
     $i
-    green "  $i"
+    ((KOANS_LEFT -= 1))
   done
-
+  ((LESSONS_LEFT -= 1))
 done
 
