@@ -16,4 +16,5 @@ Just clone this repo and run:
 
 ### License
 
-TODO: Choose an open license (May be GPL or MIT?)
+License is MIT. See LICENSE for details.
+
